@@ -12,7 +12,7 @@ for epoch in range(start_epoch, args.epochs):
             adjust_learning_rate(args, optimizer, loader, step)
             optimizer.zero_grad()
             with torch.cuda.amp.autocast():
-                loss = model.forward(y1, y2) # Barlow Twins model에 2개의 input을 
+                loss = model.forward(y1, y2) # Barlow Twins model에 2개의 input을 입력
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
