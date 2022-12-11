@@ -6,7 +6,7 @@ dataset = torchvision.datasets.ImageFolder(args.data / 'train', Transform()) # F
 
 for epoch in range(start_epoch, args.epochs):
         sampler.set_epoch(epoch)
-        for step, ((y1, y2), _) in enumerate(loader, start=epoch * len(loader)):  # Second Transform()을 하면 2개의 differently augmented된 변환된 tensor를 반환 (y1, y2)
+        for step, ((y1, y2), _) in enumerate(loader, start=epoch * len(loader)):  # Second Transform()을 하면 2개의 differently augmented된 tensor를 반환 (y1, y2)
             y1 = y1.cuda(gpu, non_blocking=True)
             y2 = y2.cuda(gpu, non_blocking=True)
             adjust_learning_rate(args, optimizer, loader, step)
@@ -39,7 +39,7 @@ class BarlowTwins(nn.Module):
         # normalization layer for the representations z1 and z2
         self.bn = nn.BatchNorm1d(sizes[-1], affine=False)
 
-    def forward(self, y1, y2):  # Third, Barlow Twins는 2개의 differently augmented된 변환된 tensor를 input으로 입력
+    def forward(self, y1, y2):  # Third, Barlow Twins는 2개의 differently augmenteded된 tensor를 input으로 입력
         z1 = self.projector(self.backbone(y1))
         z2 = self.projector(self.backbone(y2))
 
