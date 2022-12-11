@@ -4,6 +4,12 @@ dataset = torchvision.datasets.ImageFolder(args.data / 'train', Transform()) # F
 
 ...
 
+loader = torch.utils.data.DataLoader(
+        dataset, batch_size=per_device_batch_size, num_workers=args.workers,
+        pin_memory=True, sampler=sampler)
+        
+...
+
 for epoch in range(start_epoch, args.epochs):
         sampler.set_epoch(epoch)
         for step, ((y1, y2), _) in enumerate(loader, start=epoch * len(loader)):  # Second Transform()을 하면 2개의 differently augmented된 tensor를 반환 (y1, y2)
