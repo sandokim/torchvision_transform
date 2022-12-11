@@ -39,7 +39,7 @@ class BarlowTwins(nn.Module):
         # normalization layer for the representations z1 and z2
         self.bn = nn.BatchNorm1d(sizes[-1], affine=False)
 
-    def forward(self, y1, y2):                         # Third, Barlow Twins는 2개의 differently augmented된 변환된 tensor를 input으로 입력
+    def forward(self, y1, y2):  # Third, Barlow Twins는 2개의 differently augmented된 변환된 tensor를 input으로 입력
         z1 = self.projector(self.backbone(y1))
         z2 = self.projector(self.backbone(y2))
 
